@@ -4,7 +4,7 @@
 /**
  \class    TSGForOI
  \brief    Create L3MuonTrajectorySeeds from L2 Muons updated at vertex in an outside-in manner
- \author   Santiago Folgueras,Benjamin, Bibhuprasad Mahakud, Jan Frederik Schulte (Purdue University, West Lafayette)
+ \author   Benjamin Radburn-Smith, Santiago Folgueras, Bibhuprasad Mahakud, Jan Frederik Schulte (Purdue University, West Lafayette)
  */
 
 #include "DataFormats/TrackReco/interface/Track.h"
@@ -98,6 +98,11 @@ class TSGForOI : public edm::global::EDProducer<> {
     /// Distance of L2 TSOSs before and after updated with vertex
     const double tsosDiff1_;
     const double tsosDiff2_;
+    const double tsosDiff_;
+
+    /// Switch ON to use Stereo layers instead of using every layer in TEC.
+    const bool useStereoLayersInTEC_;
+
 
     /// Counters and flags for the implementation
     const std::string propagatorName_;

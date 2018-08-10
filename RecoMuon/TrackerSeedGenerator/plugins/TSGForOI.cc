@@ -1,7 +1,7 @@
 /**
   \class    TSGForOI
   \brief    Create L3MuonTrajectorySeeds from L2 Muons updated at vertex in an outside-in manner
-  \author   Santiago Folgueras,Benjamin, Bibhuprasad Mahakud, Jan Frederik Schulte (Purdue University, West Lafayette, USA)
+  \author   Benjamin Radburn-Smith, Santiago Folgueras, Bibhuprasad Mahakud, Jan Frederik Schulte (Purdue University, West Lafayette, USA)
  */
 
 #include "RecoMuon/TrackerSeedGenerator/plugins/TSGForOI.h"
@@ -48,7 +48,7 @@ TSGForOI::TSGForOI(const edm::ParameterSet & iConfig) :
   SF5_(iConfig.getParameter<double>("SF5")),
   SF6_(iConfig.getParameter<double>("SF6")),
   tsosDiff1_(iConfig.getParameter<double>("tsosDiff1")),
-  tsosDiff2_(iConfig.getParameter<double>("tsosDiff2")),
+  tsosDiff2_(iConfig.getParameter<double>("tsosDiff2")),  
   propagatorName_(iConfig.getParameter<std::string>("propagatorName")), 
   theCategory(string("Muon|RecoMuon|TSGForOI"))
 {

@@ -6,7 +6,6 @@
 #include "CondFormats/DataRecord/interface/L1TMuonOverlapParamsRcd.h"
 #include "CondFormats/L1TObjects/interface/L1TMuonOverlapParams.h"
 
-#include "L1Trigger/L1TMuonOverlap/plugins/L1TMuonOverlapTrackProducer.h"
 #include "L1Trigger/L1TMuonOverlap/interface/OMTFProcessor.h"
 #include "L1Trigger/L1TMuonOverlap/interface/OMTFinput.h"
 #include "L1Trigger/L1TMuonOverlap/interface/OMTFReconstruction.h"
@@ -74,13 +73,16 @@ void OMTFReconstruction::beginRun(edm::Run const& run, edm::EventSetup const& iS
   m_OMTF->configure(m_OMTFConfig, omtfParams);
   //m_GhostBuster.setNphiBins(m_OMTFConfig->nPhiBins());
 
-  if(m_Config.exists("ghostBusterType") ) {
-    if(m_Config.getParameter<std::string>("ghostBusterType") == "GhostBusterPreferRefDt")
+  if (m_OMTFConfig->fwVersion() >= 5) {
+//  if(m_Config.exists("ghostBusterType") ) {
+//    if(m_Config.getParameter<std::string>("ghostBusterType") == "GhostBusterPreferRefDt")
     	m_GhostBuster.reset(new GhostBusterPreferRefDt(m_OMTFConfig) );
   }
-  else
+  else {
 	  m_GhostBuster.reset(new GhostBuster() );
+  }
 
+  m_Sorter.initialize(m_OMTFConfig);
   m_Sorter.setNphiBins(m_OMTFConfig->nPhiBins());
 
   m_InputMaker.initialize(iSetup, m_OMTFConfig);

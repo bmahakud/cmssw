@@ -215,15 +215,15 @@ trackerDict = {
             'Geometry/TrackerCommonData/data/PhaseII/TiltedTracker4025/pixfwd.xml', 
             'Geometry/TrackerCommonData/data/PhaseII/TiltedTracker4025/pixbar.xml', 
             'Geometry/TrackerCommonData/data/trackermaterial.xml',
-            'Geometry/TrackerCommonData/data/PhaseII/TiltedTracker4025TwentyPercent/tracker.xml',
-            'Geometry/TrackerCommonData/data/PhaseII/TiltedTracker4025TwentyPercent/pixel.xml',
+            'Geometry/TrackerCommonData/data/PhaseII/TiltedTracker4025FiftyPercent/tracker.xml',
+            'Geometry/TrackerCommonData/data/PhaseII/TiltedTracker4025FiftyPercent/pixel.xml',
             'Geometry/TrackerCommonData/data/PhaseII/TiltedTracker4025/trackerbar.xml',
             'Geometry/TrackerCommonData/data/PhaseII/TiltedTracker4025/trackerfwd.xml',
             'Geometry/TrackerCommonData/data/PhaseII/TiltedTracker4025/trackerStructureTopology.xml',
             'Geometry/TrackerCommonData/data/PhaseII/TiltedTracker4025/pixelStructureTopology.xml',
             'Geometry/TrackerSimData/data/PhaseII/TiltedTracker4025/trackersens.xml',
             'Geometry/TrackerSimData/data/PhaseII/TiltedTracker4025/pixelsens.xml',
-            'Geometry/TrackerRecoData/data/PhaseII/TiltedTracker4025TwentyPercent/trackerRecoMaterial.xml',
+            'Geometry/TrackerRecoData/data/PhaseII/TiltedTracker4025FiftyPercent/trackerRecoMaterial.xml',
             'Geometry/TrackerSimData/data/PhaseII/TiltedTracker4025/trackerProdCuts.xml',
             'Geometry/TrackerSimData/data/PhaseII/TiltedTracker4025/pixelProdCuts.xml',
             'Geometry/TrackerSimData/data/trackerProdCutsBEAM.xml',
@@ -582,7 +582,46 @@ forwardDict = {
         "reco" :[
             'from Geometry.ForwardGeometry.ForwardGeometry_cfi import *',
         ]
+    },
+
+    "F3" : {
+        1 : [
+            'Geometry/ForwardCommonData/data/forwardshield/2023/v1/forwardshield.xml',
+            'Geometry/ForwardCommonData/data/hfnose/v1/hfnose.xml',
+            'Geometry/ForwardCommonData/data/hfnoseWafer/v1/hfnoseWafer.xml',
+            'Geometry/ForwardCommonData/data/hfnoseCell/v1/hfnoseCell.xml',
+            'Geometry/ForwardCommonData/data/hfnoseCons/v1/hfnoseCons.xml',
+            'Geometry/ForwardCommonData/data/brmrotations.xml',
+            'Geometry/ForwardCommonData/data/brm/2023/v2/brm.xml',
+            'Geometry/ForwardCommonData/data/zdcmaterials.xml',
+            'Geometry/ForwardCommonData/data/lumimaterials.xml',
+            'Geometry/ForwardCommonData/data/zdcrotations.xml',
+            'Geometry/ForwardCommonData/data/lumirotations.xml',
+            'Geometry/ForwardCommonData/data/zdc.xml',
+            'Geometry/ForwardCommonData/data/zdclumi.xml',
+            'Geometry/ForwardCommonData/data/cmszdc.xml',
+        ],
+        3 : [
+            'Geometry/ForwardSimData/data/hfnosesens.xml',
+            'Geometry/ForwardCommonData/data/brmsens.xml',
+            'Geometry/ForwardSimData/data/zdcsens.xml',
+        ],
+        4 : [
+            'Geometry/ForwardSimData/data/hfnoseProdCuts.xml',
+            'Geometry/ForwardSimData/data/zdcProdCuts.xml',
+            'Geometry/ForwardSimData/data/ForwardShieldProdCuts.xml',
+        ],
+        "sim" : [
+            'from Geometry.ForwardCommonData.hfnoseParametersInitialization_cfi import *',
+            'from Geometry.ForwardCommonData.hfnoseNumberingInitialization_cfi  import *',
+        ],
+        "reco" :[
+            'from Geometry.CaloEventSetup.HFNoseTopology_cfi            import *',
+            'from Geometry.ForwardGeometry.HFNoseGeometryESProducer_cfi import *',
+            'from Geometry.ForwardGeometry.ForwardGeometry_cfi          import *',
+        ]
     }    
+
 }
 
 timingDict = {
@@ -665,6 +704,7 @@ detectorVersionDict = {
     ("O2","T6","C4","M2","F2","I1") : "D28",
     ("O2","T11","C3","M2","F2","I1") : "D29",
     ("O2","T6","C5","M2","F2","I1") : "D30",
+    ("O2","T6","C4","M2","F3","I1") : "D31",
 }
 
 deprecatedDets = set([ "D1", "D2", "D3", "D5", "D6" , "D7", "D4", "D8" , "D9", "D12", "D13", "D15", "D10", "D11", "D14", "D16", "D18","D20" ])

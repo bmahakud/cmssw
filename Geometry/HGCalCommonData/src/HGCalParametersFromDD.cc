@@ -59,7 +59,7 @@ bool HGCalParametersFromDD::build(const DDCompactView* cpv,
 #ifdef EDM_ML_DEBUG
   edm::LogVerbatim("HGCalGeom") << "HGCalParametersFromDD::build called with "
 				<< "names " << name << ":" << namew << ":" 
-				<< namec;
+				<< namec << ":" << namet;
 #endif
 
   //Special parameters at simulation level
@@ -82,6 +82,7 @@ bool HGCalParametersFromDD::build(const DDCompactView* cpv,
 				  << HGCalGeometryMode::Hexagon8Full << ":"
 				  << ":" << HGCalGeometryMode::Trapezoid;
 #endif
+    php.levelZSide_ = 3;       // Default level for ZSide
     HGCalGeomParameters *geom = new HGCalGeomParameters();
     if ((php.mode_ == HGCalGeometryMode::Hexagon) ||
 	(php.mode_ == HGCalGeometryMode::HexagonFull)) {
@@ -104,10 +105,12 @@ bool HGCalParametersFromDD::build(const DDCompactView* cpv,
     if ((php.mode_ == HGCalGeometryMode::Hexagon8) ||
 	(php.mode_ == HGCalGeometryMode::Hexagon8Full)) {
       php.levelT_     = dbl_to_int(getDDDArray("LevelTop",sv));
+      php.levelZSide_ = (int)(getDDDValue("LevelZSide",sv));
       php.nCellsFine_ = php.nCellsCoarse_ = 0;
 #ifdef EDM_ML_DEBUG
       edm::LogVerbatim("HGCalGeom") << "Top levels " << php.levelT_[0] << ":" 
-				    << php.levelT_[1];
+				    << php.levelT_[1] << " ZSide Level "
+				    << php.levelZSide_;
 #endif
       attribute   = "OnlyForHGCalNumbering";
       value       = namet;
@@ -195,7 +198,7 @@ bool HGCalParametersFromDD::build(const DDCompactView* cpv,
       php.firstLayer_      = (int)(getDDDValue("FirstLayer", sv));
       php.waferThick_      = HGCalParameters::k_ScaleFromDDD*getDDDValue("WaferThickness", sv);
       php.waferSize_       = php.waferR_          = 0;
-      php.waferThick_      = php.sensorSeparation_= php.mouseBite_       = 0;
+      php.sensorSeparation_= php.mouseBite_       = 0;
 #ifdef EDM_ML_DEBUG
       edm::LogVerbatim("HGCalGeom") << "Top levels " << php.levelT_[0] << ":" 
 				    << php.levelT_[1] << " EtaMinBH "

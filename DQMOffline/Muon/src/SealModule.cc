@@ -26,6 +26,7 @@ DEFINE_FWK_MODULE(DTSegmentsTask);
 DEFINE_FWK_MODULE(MuonTestSummary);
 DEFINE_FWK_MODULE(DiMuonHistograms);
 DEFINE_FWK_MODULE(MuonKinVsEtaAnalyzer);
+DEFINE_FWK_MODULE(TriggerMatchMonitor);
 DEFINE_FWK_MODULE(EfficiencyAnalyzer);
 DEFINE_FWK_MODULE(MuonRecoOneHLT);
 DEFINE_FWK_MODULE(MuonRecoAnalyzer);

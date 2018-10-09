@@ -65,6 +65,11 @@ class TriggerMatchMonitor : public DQMEDAnalyzer {
   edm::EDGetTokenT<reco::BeamSpot>         theBeamSpotLabel_;
   edm::EDGetTokenT<edm::TriggerResults > triggerResultsToken_;
   edm::EDGetTokenT<std::vector<pat::TriggerObjectStandAlone>> triggerObjects_;
+
+  edm::EDGetTokenT<reco::BeamSpot > beamSpotToken_;
+  edm::EDGetTokenT<std::vector<reco::Vertex> > primaryVerticesToken_;
+
+
   
   //histo binning parameters
   int etaBin;

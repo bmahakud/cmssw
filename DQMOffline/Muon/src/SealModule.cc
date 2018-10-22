@@ -16,7 +16,7 @@
 #include "DQMOffline/Muon/interface/SegmentTrackAnalyzer.h"
 #include "DQMOffline/Muon/interface/MuonSeedsAnalyzer.h"
 #include "DQMOffline/Muon/interface/MuonEnergyDepositAnalyzer.h"
-
+#include "DQMOffline/Muon/interface/TriggerMatchMonitor.h"
 #include "DQMOffline/Muon/interface/MuonMiniAOD.h"
 
 DEFINE_FWK_MODULE(MuonTrackResidualsTest);

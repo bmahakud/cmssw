@@ -9,6 +9,7 @@ from DQMOffline.Muon.muonEnergyDepositAnalyzer_cfi import *
 from DQMOffline.Muon.segmentTrackAnalyzer_cfi import *
 from DQMOffline.Muon.muonSeedsAnalyzer_cfi import *
 from DQMOffline.Muon.muonPFAnalyzer_cfi import *
+from DQMOffline.Muon.triggerMatchMonitor_cfi import *
 
 muonAnalyzer = cms.Sequence(muonEnergyDepositAnalyzer*
                             muonSeedsAnalyzer*

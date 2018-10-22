@@ -50,17 +50,32 @@ void TriggerMatchMonitor::bookHistograms(DQMStore::IBooker & ibooker,
     ibooker.cd();
     ibooker.setCurrentFolder(theFolder);
 
-    // monitoring of eta parameter
-    matchHists.push_back(ibooker.book1D("DelEta_HLT_IsoMu24", "DeltaEta_HLT_IsoMu24", 600, 0.0, 6.0));
-    matchHists.push_back(ibooker.book1D("DelPhi_HLT_IsoMu24", "DeltaPhi_HLT_IsoMu24", 600, 0.0, 6.0));
-    matchHists.push_back(ibooker.book1D("DelR_HLT_IsoMu24", "DeltaR_HLT_IsoMu24", 600, 0.0, 6.0));
-    matchHists.push_back(ibooker.book1D("DelEta_L1_IsoMu24", "DeltaEta_L1_IsoMu24", 600, 0.0, 6.0));
-    matchHists.push_back(ibooker.book1D("DelPhi_L1_IsoMu24", "DeltaPhi_L1_IsoMu24", 600, 0.0, 6.0));
-    matchHists.push_back(ibooker.book1D("DelR_L1_IsoMu24", "DeltaR_L1_IsoMu24", 600, 0.0, 6.0));
-    matchHists.push_back(ibooker.book1D("PtDiff_HLT_IsoMu24", "PtDiff_HLT_IsoMu24", 400, -500., 500.0));
-    matchHists.push_back(ibooker.book1D("PtDiff_L1_IsoMu24", "PtDiff_L1_IsoMu24", 400, -500., 500.0));
+    // monitoring of trigger match parameter
+   
+    matchHists.push_back(ibooker.book1D("DelR_HLT_IsoMu24_v1", "DeltaR_(offline,HLT)_triggerPass(IsoMu24)", 500, 0.0, 0.5));
+    matchHists.push_back(ibooker.book1D("DelR_HLT_IsoMu24_v2", "DeltaR_(offline,HLT)_triggerPass(IsoMu24)", 1000, 0.0, 1.0));
+    matchHists.push_back(ibooker.book1D("DelR_HLT_IsoMu24_v3", "DeltaR_(offline,HLT)_triggerPass(IsoMu24)", 5000, 0.0, 5.0));
+    matchHists.push_back(ibooker.book1D("PtRatio_HLT_IsoMu24", "PtRatio_(HLTPt/OfflinePt)_IsoMu24", 200, -5., 5.0));
+
+    matchHists.push_back(ibooker.book1D("DelR_L1_IsoMu24_v1", "DeltaR_(offline, L1)_triggerPass(IsoMu24)", 500, 0.0, 1.0));
+    matchHists.push_back(ibooker.book1D("DelR_L1_IsoMu24_v2", "DeltaR_(offline, L1)_triggerPass(IsoMu24)", 1000, 0.0, 2.0));
+    matchHists.push_back(ibooker.book1D("PtRatio_L1_IsoMu24", "PtRatio_(HLTPt/OfflinePt)_IsoMu24", 200, -5., 5.0));
+   
+    matchHists.push_back(ibooker.book1D("DelR_HLT_Mu50_v1", "DeltaR_(offline,HLT)_triggerPass(Mu50)", 500, 0.0, 0.5));
+    matchHists.push_back(ibooker.book1D("DelR_HLT_Mu50_v2", "DeltaR_(offline,HLT)_triggerPass(Mu50)", 1000, 0.0, 1.0));
+    matchHists.push_back(ibooker.book1D("DelR_HLT_Mu50_v3", "DeltaR_(offline,HLT)_triggerPass(Mu50)", 5000, 0.0, 5.0));
+    matchHists.push_back(ibooker.book1D("PtRatio_HLT_Mu50", "PtRatio_(HLTPt/OfflinePt)_Mu50", 200, -5., 5.0));
+
+    matchHists.push_back(ibooker.book1D("DelR_L1_Mu50_v1", "DeltaR_(offline, L1)_triggerPass(Mu50)", 500, 0.0, 1.0));
+    matchHists.push_back(ibooker.book1D("DelR_L1_Mu50_v2", "DeltaR_(offline, L1)_triggerPass(Mu50)", 1000, 0.0, 2.0));
+    matchHists.push_back(ibooker.book1D("PtRatio_L1_Mu50", "PtRatio_(HLTPt/OfflinePt)_Mu50", 200, -5., 5.0));
+
+ 
 
 
+
+
+ 
 
 
 }
@@ -117,7 +132,7 @@ void TriggerMatchMonitor::analyze(const edm::Event& iEvent, const edm::EventSetu
 
    if(PATmuons.isValid()){//valid pat Muon
 
-      for( auto & patMuon : *PATmuons){//pat muon loop
+      for(const auto & patMuon : *PATmuons){//pat muon loop
       bool Isolated=patMuon.pfIsolationR04().sumChargedHadronPt + TMath::Max(0., patMuon.pfIsolationR04().sumNeutralHadronEt + patMuon.pfIsolationR04().sumPhotonEt - 0.5*patMuon.pfIsolationR04().sumPUPt)  / patMuon.pt() < 0.25;
       
 
@@ -126,36 +141,91 @@ void TriggerMatchMonitor::analyze(const edm::Event& iEvent, const edm::EventSetu
       TLorentzVector offlineMuon;
       offlineMuon.SetPtEtaPhiM(patMuon.pt(), patMuon.eta(), patMuon.phi(),0.0);
 
-      char array[] = "HLT_IsoMu24_v*";  // modifiable array of 5 bytes
-      char *ptr;        // array can be modified via p
-      ptr = array;      // array cannot be modified via q
+      char array24[] = "HLT_IsoMu24_v*";  // 
+      char *ptrmu24;        // 
+      ptrmu24 = array24;      //
 
-      if(patMuon.triggered(ptr)){
+      char array50[] = "HLT_Mu50_v*";  // 
+      char *ptrmu50;        // 
+      ptrmu50 = array50;      //
+
+
+
+
+
+      if(patMuon.triggered(ptrmu24)){
 
       try{
 
 
-      matchHists[0]->Fill(patMuon.eta()-patMuon.hltObject()->eta());
-      matchHists[1]->Fill(patMuon.phi()-patMuon.hltObject()->phi());     
-      matchHists[6]->Fill(patMuon.pt()-patMuon.hltObject()->pt());     
       TLorentzVector hltMuon;
       hltMuon.SetPtEtaPhiM(patMuon.hltObject()->pt(),patMuon.hltObject()->eta(),patMuon.hltObject()->phi(),0.0);
    
       double DelRrecoHLT=offlineMuon.DeltaR(hltMuon);
-  
-      matchHists[2]->Fill(DelRrecoHLT);   
+        
+
+      matchHists[0]->Fill(DelRrecoHLT);   
+      matchHists[1]->Fill(DelRrecoHLT);
+      matchHists[2]->Fill(DelRrecoHLT);
+      matchHists[3]->Fill(patMuon.hltObject()->pt()/patMuon.pt());
 
       if(patMuon.l1Object() !=nullptr){
-      matchHists[3]->Fill(patMuon.eta()-patMuon.l1Object()->eta());
-      matchHists[4]->Fill(patMuon.phi()-patMuon.l1Object()->phi());
-      
-      matchHists[7]->Fill(patMuon.pt()-patMuon.l1Object()->pt());
+      TLorentzVector L1Muon;
+      L1Muon.SetPtEtaPhiM(patMuon.l1Object()->pt(),patMuon.l1Object()->eta(),patMuon.l1Object()->phi(),0.0);
+      double DelRrecoL1=offlineMuon.DeltaR(L1Muon);
+      matchHists[4]->Fill(DelRrecoL1);
+      matchHists[5]->Fill(DelRrecoL1);
+      matchHists[6]->Fill(patMuon.l1Object()->pt()/patMuon.pt());     
+
 
       }
 
        }catch(...){}
 
       }
+
+
+      /// Mu50 test
+      if(patMuon.triggered(ptrmu50)){
+
+      try{
+
+
+      TLorentzVector hltMuon_;
+      hltMuon_.SetPtEtaPhiM(patMuon.hltObject()->pt(),patMuon.hltObject()->eta(),patMuon.hltObject()->phi(),0.0);
+
+      double DelRrecoHLT_=offlineMuon.DeltaR(hltMuon_);
+
+
+      matchHists[7]->Fill(DelRrecoHLT_);
+      matchHists[8]->Fill(DelRrecoHLT_);
+      matchHists[9]->Fill(DelRrecoHLT_);
+      matchHists[10]->Fill(patMuon.hltObject()->pt()/patMuon.pt());
+
+      if(patMuon.l1Object() !=nullptr){
+      TLorentzVector L1Muon_;
+      L1Muon_.SetPtEtaPhiM(patMuon.l1Object()->pt(),patMuon.l1Object()->eta(),patMuon.l1Object()->phi(),0.0);
+      double DelRrecoL1_=offlineMuon.DeltaR(L1Muon_);
+      matchHists[11]->Fill(DelRrecoL1_);
+      matchHists[12]->Fill(DelRrecoL1_);
+      matchHists[13]->Fill(patMuon.l1Object()->pt()/patMuon.pt());
+
+
+      }
+
+       }catch(...){}
+
+      }
+
+
+
+
+
+
+
+
+
+
 
       }//isolated tight muon
       } //pat muon loop

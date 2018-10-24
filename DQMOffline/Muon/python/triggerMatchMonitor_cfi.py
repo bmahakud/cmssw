@@ -28,5 +28,11 @@ triggerMatchMonitor_miniAOD = DQMEDAnalyzer('TriggerMatchMonitor',
                                               triggerObjects = cms.InputTag("slimmedPatTrigger"),
                                               hltCollectionFilters = cms.vstring('*'),
                                               triggerNameList = cms.vstring('HLT_Mu27_v*'),
+                                              triggerPathName1 = cms.string('HLT_IsoMu24_v*'),
+                                              triggerHistName1 = cms.string('IsoMu24'),
+                                              triggerPtThresholdPath1 = cms.double(20.0),
+                                              triggerPathName2 = cms.string('HLT_Mu50_v*'),
+                                              triggerHistName2 = cms.string('Mu50'),
+                                              triggerPtThresholdPath2 = cms.double(40.0),
                                               folder = cms.string("Muons_miniAOD/TriggerMatchMonitor")
                                               )

@@ -5,6 +5,7 @@
 #include "DQMOffline/Muon/interface/MuonTrackResidualsTest.h"
 #include "DQMOffline/Muon/interface/MuonRecoTest.h"
 #include "DQMOffline/Muon/interface/EfficiencyPlotter.h"
+#include "DQMOffline/Muon/interface/TriggerMatchEfficiencyPlotter.h"
 #include "DQMOffline/Muon/interface/MuonTestSummary.h"
 
 #include "DQMOffline/Muon/interface/DiMuonHistograms.h"
@@ -22,6 +23,7 @@
 DEFINE_FWK_MODULE(MuonTrackResidualsTest);
 DEFINE_FWK_MODULE(MuonRecoTest);
 DEFINE_FWK_MODULE(EfficiencyPlotter);
+DEFINE_FWK_MODULE(TriggerMatchEfficiencyPlotter);
 DEFINE_FWK_MODULE(DTSegmentsTask);
 DEFINE_FWK_MODULE(MuonTestSummary);
 DEFINE_FWK_MODULE(DiMuonHistograms);

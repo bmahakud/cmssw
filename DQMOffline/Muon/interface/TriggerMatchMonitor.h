@@ -1,6 +1,6 @@
 #ifndef TriggerMatchMonitor_H
 #define TriggerMatchMonitor_H
-/** \class MuRecoAnalyzer
+/** \class TriggerMatch monitor
  *
  *  DQM monitoring source for Trigger matching feature added to miniAOD
  *
@@ -55,8 +55,13 @@ class TriggerMatchMonitor : public DQMEDAnalyzer {
   DQMStore* theDbe;
   edm::ParameterSet parameters;
  
-  // Switch for verbosity
-  std::string metname;
+  // triggerNames to be passed from config
+  std::string triggerPathName1_;
+  std::string triggerHistName1_;
+  double triggerPtThresholdPath1_;
+  std::string triggerPathName2_;
+  std::string triggerHistName2_;
+  double triggerPtThresholdPath2_;
 
   //Vertex requirements
   edm::EDGetTokenT<edm::View<reco::Muon> >   theMuonCollectionLabel_;
@@ -73,6 +78,27 @@ class TriggerMatchMonitor : public DQMEDAnalyzer {
 
   // global muon
   std::vector<MonitorElement*> matchHists;
+  MonitorElement* h_passHLTPath1_eta_Tight;
+  MonitorElement* h_passHLTPath1_pt_Tight;
+  MonitorElement* h_passHLTPath1_phi_Tight; 
+  MonitorElement* h_totalHLTPath1_eta_Tight; 
+  MonitorElement* h_totalHLTPath1_pt_Tight; 
+  MonitorElement* h_totalHLTPath1_phi_Tight;
+
+  MonitorElement* h_passHLTPath2_eta_Tight; 
+  MonitorElement* h_passHLTPath2_pt_Tight; 
+  MonitorElement* h_passHLTPath2_phi_Tight;
+  MonitorElement* h_totalHLTPath2_eta_Tight;
+  MonitorElement* h_totalHLTPath2_pt_Tight;
+  MonitorElement* h_totalHLTPath2_phi_Tight;
+
+
+
+
+
+
+
+
 
   std::string theFolder;
 };

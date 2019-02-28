@@ -101,6 +101,8 @@ patMuons = cms.EDProducer("PATMuonProducer",
     computeMiniIso = cms.bool(False),
     pfCandsForMiniIso = cms.InputTag("packedPFCandidates"),
     miniIsoParams = cms.vdouble(0.05, 0.2, 10.0, 0.5, 0.0001, 0.01, 0.01, 0.01, 0.0),
+    #only works in miniaod, so set to True in miniAOD_tools.py
+    computePuppiCombinedIso = cms.bool(False),
 
     # Standard Muon Selectors and Jet-related observables
     # Depends on MiniIsolation, so only works in miniaod

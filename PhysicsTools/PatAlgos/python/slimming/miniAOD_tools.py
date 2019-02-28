@@ -29,6 +29,7 @@ def miniAOD_customizeCommon(process):
     process.patMuons.computeMuonMVA = cms.bool(True)
     process.patMuons.computeSoftMuonMVA = cms.bool(True)
 
+    process.patMuons.computePuppiCombinedIso = cms.bool(True)
     process.patMuons.addTriggerMatching = True
 
     #

@@ -216,7 +216,13 @@ namespace reco {
       InTimeMuon             = 1UL<<23,   
       PFIsoVeryVeryTight     = 1UL<<24,  // reliso<0.05
       MultiIsoLoose          = 1UL<<25,  // miniIso with ptRatio and ptRel 
-      MultiIsoMedium         = 1UL<<26   // miniIso with ptRatio and ptRel 
+      MultiIsoMedium         = 1UL<<26,   // miniIso with ptRatio and ptRel 
+      PuppiIsoLoose2016      = 1UL<<27,
+      PuppiIsoMedium2016     = 1UL<<28,
+      PuppiIsoTight2016      = 1UL<<29,
+      PuppiIsoLoose2017      = 1UL<<30,
+      PuppiIsoMedium2017      = 1UL<<31,
+      PuppiIsoTight2017      = 1UL<<32
     };
     
     bool passed( unsigned int selection ) const { return (selectors_ & selection)==selection; }

@@ -37,6 +37,7 @@
 #include "DataFormats/PatCandidates/interface/TriggerObjectStandAlone.h"
 #include "Geometry/Records/interface/GlobalTrackingGeometryRecord.h"
 #include "DataFormats/Common/interface/TriggerResults.h"
+#include <iostream>
 
 namespace pat {
 
@@ -99,7 +100,7 @@ namespace pat {
     template<typename T> void readIsolationLabels( const edm::ParameterSet & iConfig, const char* psetName, IsolationLabels& labels, std::vector<edm::EDGetTokenT<edm::ValueMap<T> > > & tokens);
 
     void setMuonMiniIso(pat::Muon& aMuon, const pat::PackedCandidateCollection *pc);
-    double getRelMiniIsoPUCorrected(const pat::Muon& muon, float rho);
+    double getRelMiniIsoPUCorrected(const pat::Muon& muon, float rho,std::string era);
 
     // embed various impact parameters with errors
     // embed high level selection
@@ -233,6 +234,10 @@ namespace pat {
     edm::EDGetTokenT<std::vector<pat::TriggerObjectStandAlone>> triggerObjects_;
     edm::EDGetTokenT<edm::TriggerResults> triggerResults_;
     std::vector<std::string> hltCollectionFilters_;
+   //figure out active era during run time 
+    std::string activeEra_;
+
+
   };
 
 }

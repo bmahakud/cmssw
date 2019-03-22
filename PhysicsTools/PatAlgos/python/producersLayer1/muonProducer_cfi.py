@@ -1,5 +1,7 @@
 import FWCore.ParameterSet.Config as cms
 
+from Configuration.StandardSequences.Eras import eras
+
 patMuons = cms.EDProducer("PATMuonProducer",
     # input
     muonSource      = cms.InputTag("muons"),
@@ -101,6 +103,7 @@ patMuons = cms.EDProducer("PATMuonProducer",
     computeMiniIso = cms.bool(False),
     pfCandsForMiniIso = cms.InputTag("packedPFCandidates"),
     miniIsoParams = cms.vdouble(0.05, 0.2, 10.0, 0.5, 0.0001, 0.01, 0.01, 0.01, 0.0),
+    activeEra = cms.string("Run2_2018"),
 
     # Standard Muon Selectors and Jet-related observables
     # Depends on MiniIsolation, so only works in miniaod
@@ -129,8 +132,8 @@ patMuons = cms.EDProducer("PATMuonProducer",
 )
 
 
-
-
+eras.run2_miniAOD_80XLegacy.toModify(patMuons, activeEra=cms.string("run2_miniAOD_80XLegacy"))
+eras.run2_miniAOD_94XFall17.toModify(patMuons, activeEra=cms.string("run2_miniAOD_94XFall17"))
 
 
 

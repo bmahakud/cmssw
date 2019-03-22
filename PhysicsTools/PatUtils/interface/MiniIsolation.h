@@ -12,7 +12,8 @@
 #include "DataFormats/PatCandidates/interface/PackedCandidate.h"
 #include "DataFormats/PatCandidates/interface/PFIsolation.h"
 #include "DataFormats/Math/interface/LorentzVector.h"
-
+#include <iostream>
+#include <string>
 namespace pat{
 
   float miniIsoDr(const math::XYZTLorentzVector &p4, float mindr, float maxdr,
@@ -28,7 +29,8 @@ namespace pat{
   float muonRelMiniIsoPUCorrected(const PFIsolation& iso,
 				  const math::XYZTLorentzVector& p4,
 				  float dr,
-				  float rho);
+				  float rho,
+                                  std::string era);
 }
 
 #endif

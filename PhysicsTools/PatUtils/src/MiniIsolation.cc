@@ -2,7 +2,8 @@
 #include "DataFormats/PatCandidates/interface/PackedCandidate.h"
 #include "DataFormats/Math/interface/deltaR.h"
 #include "PhysicsTools/PatUtils/interface/MiniIsolation.h"
-
+#include <string>
+#include<iostream>
 namespace pat{
 
 // Computes MiniIsolation given a 4-vector of the object in question
@@ -58,16 +59,28 @@ PFIsolation getMiniPFIsolation(const pat::PackedCandidateCollection *pfcands,
   float muonRelMiniIsoPUCorrected(const PFIsolation& iso,
 				  const math::XYZTLorentzVector& p4,
 				  float dr,
-				  float rho)
+				  float rho,
+                                  std::string era)
   {
     double absEta = fabs(p4.eta());
     double ea = 0;
     //Spring15 version
+    if(era=="run2_miniAOD_80XLegacy"){
     if      (absEta<0.800) ea = 0.0735;
     else if (absEta<1.300) ea = 0.0619;
     else if (absEta<2.000) ea = 0.0465;
     else if (absEta<2.200) ea = 0.0433;
     else if (absEta<2.500) ea = 0.0577;
+    }
+
+    if(era=="run2_miniAOD_94XFall17"){
+    if      (absEta<0.800) ea = 0.0566;
+    else if (absEta<1.300) ea = 0.0562;
+    else if (absEta<2.000) ea = 0.0363;
+    else if (absEta<2.200) ea = 0.0119;
+    else if (absEta<2.500) ea = 0.0064;
+    }
+
     double correction = rho * ea * (dr/0.3) * (dr/0.3);
     double correctedIso = iso.chargedHadronIso() + std::max(0.0, iso.neutralHadronIso()+iso.photonIso() - correction);
     return correctedIso/p4.pt();

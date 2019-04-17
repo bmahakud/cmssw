@@ -30,7 +30,9 @@ def miniAOD_customizeCommon(process):
     process.patMuons.computeSoftMuonMVA = cms.bool(True)
 
     process.patMuons.addTriggerMatching = True
+    from Configuration.Eras.Modifier_run2_muon_2017_cff import run2_muon_2017
 
+    #run2_muon_2017.toModify( process.patMuons, effectiveAreaVec = cms.vdouble(0.55, 0.0562, 0.0363, 0.0119, 0.0064))
     #
     # disable embedding of electron and photon associated objects already stored by the ReducedEGProducer
     process.patElectrons.embedGsfElectronCore = False  ## process.patElectrons.embed in AOD externally stored gsf electron core

@@ -99,7 +99,7 @@ namespace pat {
     template<typename T> void readIsolationLabels( const edm::ParameterSet & iConfig, const char* psetName, IsolationLabels& labels, std::vector<edm::EDGetTokenT<edm::ValueMap<T> > > & tokens);
 
     void setMuonMiniIso(pat::Muon& aMuon, const pat::PackedCandidateCollection *pc);
-    double getRelMiniIsoPUCorrected(const pat::Muon& muon, float rho);
+    double getRelMiniIsoPUCorrected(const pat::Muon& muon,  double rho, std::vector<double> &EA);
 
     // embed various impact parameters with errors
     // embed high level selection
@@ -130,6 +130,7 @@ namespace pat {
     // for mini-iso calculation
     edm::EDGetTokenT<pat::PackedCandidateCollection > pcToken_;
     bool computeMiniIso_;
+    std::vector<double> effectiveAreaVec_;
     std::vector<double> miniIsoParams_;
     double relMiniIsoPUCorrected_;
 
